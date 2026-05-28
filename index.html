@@ -67,6 +67,20 @@ body{font-family:'IBM Plex Sans',sans-serif;background:var(--paper);color:var(--
 @media(max-width:640px){
   .platform-web .kofi-badge{height:28px;width:138px;margin-right:2px}
 }
+/* ── KO-FI sur sa propre ligne (web + écran étroit) ───────────────────────────
+   Sous 560px en mode web : le badge sort du flux de .hbtns et se place sous le
+   titre/sous-titre, aligné à gauche sur le bord du header. On réserve la place
+   avec un padding-bottom sur .header. N'affecte QUE .platform-web → natif intact. */
+@media(max-width:560px){
+  .platform-web .header{padding-bottom:50px}
+  .platform-web .kofi-badge{
+    position:absolute;
+    left:14px;
+    bottom:12px;
+    margin:0;
+    z-index:2;
+  }
+}
 
 /* ── FOOTER STORES (web-only) ───────────────────────────────────────────────
    Sticky en bas de l'app sur la version web. Affiche les 2 badges officiels
