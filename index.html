@@ -67,13 +67,25 @@ body{font-family:'IBM Plex Sans',sans-serif;background:var(--paper);color:var(--
 @media(max-width:640px){
   .platform-web .kofi-badge{height:28px;width:138px;margin-right:2px}
 }
-/* ── KO-FI sur sa propre ligne (web + écran étroit) ───────────────────────────
-   Sous 640px en mode web : le badge sort du flux de .hbtns et se place sous le
-   titre/sous-titre, aligné à gauche sur le bord du header. On réserve la place
-   avec un padding-bottom sur .header. N'affecte QUE .platform-web → natif intact. */
+/* ── LIGNE BASSE (web + écran étroit) ─────────────────────────────────────────
+   Sous 640px en mode web : sur une ligne sous le titre/sous-titre, on place
+   le badge Ko-fi (à gauche) et le label « version web » (à droite). Les deux
+   sont en position:absolute ancrés sur .header (overflow:visible). On passe
+   .htitle et .hbtns en static pour que l'ancrage remonte jusqu'à .header et
+   que le label ne soit plus coupé par l'overflow:hidden de .htitle.
+   N'affecte QUE .platform-web → natif intact. */
 @media(max-width:640px){
-  .platform-web .header{padding-bottom:48px}
+  .platform-web .header{padding-bottom:46px}
+  .platform-web .htitle{position:static}
   .platform-web .hbtns{position:static}
+  .platform-web .web-badge{
+    position:absolute;
+    right:14px;
+    bottom:14px;
+    margin:0;
+    vertical-align:baseline;
+    z-index:2;
+  }
   .platform-web .kofi-badge{
     position:absolute;
     left:14px;
