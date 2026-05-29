@@ -6,6 +6,10 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#1a1208">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<!-- PWA (version web) : manifest + icône iOS. Ignorés sans effet sur natif/desktop. -->
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon-180.png">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>Fake Book Index</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap');
@@ -2170,6 +2174,21 @@ function tourEnd(){
 }
 
 // (pas de fermeture au clic sur l'overlay — l'utilisateur doit utiliser Suivant/Passer/Terminer)
+
+// === WEB-ONLY FEATURES : PWA / Service Worker ==============================
+// Enregistré UNIQUEMENT en mode web (getPlatform() === 'web'). Jamais sur
+// natif (iOS/Android WebView) ni desktop (file://). Le SW cache la coquille
+// (HTML + manifest + icônes) ; le JSON reste géré par l'OTA + IndexedDB.
+(function registerWebSW(){
+  if(AppBridge.getPlatform() !== 'web') return;
+  if(!('serviceWorker' in navigator)) return;
+  window.addEventListener('load', function(){
+    navigator.serviceWorker.register('sw.js')
+      .then(function(reg){ console.log('[FBI-PWA] SW enregistré, scope:', reg.scope); })
+      .catch(function(err){ console.warn('[FBI-PWA] SW échec enregistrement:', err); });
+  });
+})();
+// === FIN WEB-ONLY : PWA / Service Worker ===================================
 </script>
 
 <!-- FOOTER STORES (web-only, sticky en bas, classe web-only gère la visibilité) -->
