@@ -17,7 +17,7 @@
    L'ancien cache est purgé à l'activation du nouveau SW.
    ========================================================================== */
 
-const CACHE_VERSION = 'fbi-web-v1';
+const CACHE_VERSION = 'fbi-web-v2';
 const CACHE_NAME = CACHE_VERSION;
 
 // Coquille pré-cachée à l'installation. Chemins relatifs à la racine du scope (/fbi-web/).
@@ -25,10 +25,10 @@ const PRECACHE_URLS = [
   './',
   './index.html',
   './manifest.webmanifest',
-  './icons/app-icon-any-192.png',
-  './icons/app-icon-any-512.png',
+  './icons/app-icon-192.png',
+  './icons/app-icon-512.png',
   './icons/app-icon-maskable-512.png',
-  './icons/apple-touch-icon-180.png'
+  './icons/app-icon-180.png'
 ];
 
 // ─── Install : pré-cache la coquille, puis prend la main immédiatement ───────
